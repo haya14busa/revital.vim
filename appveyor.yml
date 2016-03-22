@@ -13,9 +13,10 @@ install:
     git -c advice.detachedHead=false clone https://github.com/thinca/vim-themis --quiet --branch v1.5 --single-branch --depth 1 $Env:TEMP\vim-themis
     git -c advice.detachedHead=false clone https://github.com/vim-jp/vital.vim --quiet --depth 1 $Env:TEMP\vital.vim
     git -c advice.detachedHead=false clone https://github.com/haya14busa/vital-power-assert --quiet --depth 1 $Env:TEMP\vital-power-assert
+    git -c advice.detachedHead=false clone https://github.com/haya14busa/revital.vim --quiet --depth 1 $Env:TEMP\revital.vim
 build: off
 test_script:
 - ps: |
     & $Env:THEMIS_VIM --version
-    & $Env:TEMP\vim-themis\bin\themis.bat --runtimepath $Env:APPVEYOR_BUILD_FOLDER\test\_testdata\testplugin --runtimepath $Env:APPVEYOR_BUILD_FOLDER\test\_testdata\testplugin\test\_testdata\cyclic --runtimepath $Env:TEMP\vital.vim --runtimepath $Env:TEMP\vital-power-assert --reporter spec
+    & $Env:TEMP\vim-themis\bin\themis.bat --runtimepath $Env:TEMP\test\_testdata\testplugin --runtimepath $Env:TEMP\test\_testdata\testplugin\test\_testdata\cyclic --runtimepath $Env:TEMP\vital.vim --runtimepath $Env:TEMP\vital-power-assert --reporter spec
 deploy: off

@@ -9,8 +9,6 @@ Describe Revital
     let vitalize_modules  = ['Data.List', 'Data.String', 'Web.JSON', 'Cyclic1']
     verbose echo '========'
     verbose echo &rtp
-    execute ':runtime!' g:testplugin_root g:cyclic_module_root
-    verbose echo &rtp
     execute ':Vitalize' g:testplugin_root join(vitalize_modules, ' ')
     execute ':Revitalize' g:testplugin_root
   End
