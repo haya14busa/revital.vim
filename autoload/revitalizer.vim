@@ -6,15 +6,21 @@ let s:Filepath = s:V.import('System.Filepath')
 let s:ScriptLocal = s:V.import('Vim.ScriptLocal')
 let s:Dict = s:V.import('Data.Dict')
 let s:I = s:V.import('Data.String.Interpolation')
+let s:Message = s:V.import('Vim.Message')
 
 let s:REVITAL_FILE = s:Filepath.join(expand('<sfile>:h'), 'vital', 'revital.vim')
 let s:build_vital_data = s:ScriptLocal.sfuncs('autoload/vitalizer.vim').build_vital_data
 
 function! revitalizer#command(args) abort
   let target_dir = fnamemodify(a:args[0], ':p')
-  let revitalizer = s:Revitalizer.new(target_dir)
-  call revitalizer.revitalize()
-  echo printf('succeeded to revitalize %s', target_dir)
+  try
+    let revitalizer = s:Revitalizer.new(target_dir)
+    call revitalizer.revitalize()
+  catch /Revitalizer:/
+    call s:Message.error(v:exception)
+    return
+  endtry
+  call s:Message.echomsg('MoreMsg', printf('succeeded to revitalize %s', target_dir))
 endfunction
 
 " s:Revitalizer re-:Vitalize vital modules to call them via autoload function.
@@ -36,6 +42,9 @@ endfunction
 function! s:Revitalizer.__init__(project_root_dir) abort
   let self.project_root_dir = fnamemodify(a:project_root_dir, ':p')
   let self.vital_data = s:build_vital_data(self.project_root_dir, '')
+  if !filereadable(self.vital_data.vital_file)
+    call self.throw(printf('%s not found. Please :Vitalize before :Revitalize', self.vital_data.vital_file))
+  endif
   let self.vital_dir_rel = s:Filepath.join('autoload', 'vital', '_' . self.vital_data.name)
   let self.vital_dir = s:Filepath.join([self.project_root_dir, self.vital_dir_rel])
   " Load all vital files before calling s:ScriptLocal.scriptnames()

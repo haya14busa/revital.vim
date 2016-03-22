@@ -6,3 +6,4 @@ System.Filepath
 Vim.ScriptLocal
 Data.Dict
 Data.String.Interpolation
+Vim.Message
