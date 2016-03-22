@@ -174,7 +174,7 @@ else
   endfunction
 endif
 
-let s:___revitalizer_functions___ = {'s': s:___revitalizer_function___('s:s'),'e': s:___revitalizer_function___('s:e'),'interpolate': s:___revitalizer_function___('s:interpolate'),'format': s:___revitalizer_function___('s:format')}
+let s:___revitalizer_functions___ = {'e': s:___revitalizer_function___('s:e'),'format': s:___revitalizer_function___('s:format'),'interpolate': s:___revitalizer_function___('s:interpolate'),'s': s:___revitalizer_function___('s:s')}
 
 unlet! s:___revitalizer_sid
 delfunction s:___revitalizer_function___

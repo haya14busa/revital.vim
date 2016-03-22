@@ -265,7 +265,7 @@ else
   endfunction
 endif
 
-let s:___revitalizer_functions___ = {'move_exe': s:___revitalizer_function___('s:move_exe'),'move': s:___revitalizer_function___('s:move'),'copy_exe': s:___revitalizer_function___('s:copy_exe'),'move_vim': s:___revitalizer_function___('s:move_vim'),'copy': s:___revitalizer_function___('s:copy'),'copy_vim': s:___revitalizer_function___('s:copy_vim'),'mkdir_nothrow': s:___revitalizer_function___('s:mkdir_nothrow'),'open': s:___revitalizer_function___('s:open'),'rmdir': s:___revitalizer_function___('s:rmdir')}
+let s:___revitalizer_functions___ = {'copy': s:___revitalizer_function___('s:copy'),'copy_exe': s:___revitalizer_function___('s:copy_exe'),'copy_vim': s:___revitalizer_function___('s:copy_vim'),'mkdir_nothrow': s:___revitalizer_function___('s:mkdir_nothrow'),'move': s:___revitalizer_function___('s:move'),'move_exe': s:___revitalizer_function___('s:move_exe'),'move_vim': s:___revitalizer_function___('s:move_vim'),'open': s:___revitalizer_function___('s:open'),'rmdir': s:___revitalizer_function___('s:rmdir')}
 
 unlet! s:___revitalizer_sid
 delfunction s:___revitalizer_function___

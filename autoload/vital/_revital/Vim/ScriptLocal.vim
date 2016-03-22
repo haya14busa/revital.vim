@@ -231,7 +231,7 @@ else
   endfunction
 endif
 
-let s:___revitalizer_functions___ = {'sid2path': s:___revitalizer_function___('s:sid2path'),'sid2sfuncs': s:___revitalizer_function___('s:sid2sfuncs'),'sfuncs': s:___revitalizer_function___('s:sfuncs'),'scriptnames': s:___revitalizer_function___('s:scriptnames'),'sid': s:___revitalizer_function___('s:sid'),'sid2svars': s:___revitalizer_function___('s:sid2svars'),'svars': s:___revitalizer_function___('s:svars')}
+let s:___revitalizer_functions___ = {'scriptnames': s:___revitalizer_function___('s:scriptnames'),'sfuncs': s:___revitalizer_function___('s:sfuncs'),'sid': s:___revitalizer_function___('s:sid'),'sid2path': s:___revitalizer_function___('s:sid2path'),'sid2sfuncs': s:___revitalizer_function___('s:sid2sfuncs'),'sid2svars': s:___revitalizer_function___('s:sid2svars'),'svars': s:___revitalizer_function___('s:svars')}
 
 unlet! s:___revitalizer_sid
 delfunction s:___revitalizer_function___

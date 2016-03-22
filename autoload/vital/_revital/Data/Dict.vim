@@ -116,7 +116,7 @@ else
   endfunction
 endif
 
-let s:___revitalizer_functions___ = {'pick': s:___revitalizer_function___('s:pick'),'clear': s:___revitalizer_function___('s:clear'),'foldl': s:___revitalizer_function___('s:foldl'),'max_by': s:___revitalizer_function___('s:max_by'),'omit': s:___revitalizer_function___('s:omit'),'min_by': s:___revitalizer_function___('s:min_by'),'swap': s:___revitalizer_function___('s:swap'),'foldr': s:___revitalizer_function___('s:foldr'),'make_index': s:___revitalizer_function___('s:make_index'),'make': s:___revitalizer_function___('s:make')}
+let s:___revitalizer_functions___ = {'clear': s:___revitalizer_function___('s:clear'),'foldl': s:___revitalizer_function___('s:foldl'),'foldr': s:___revitalizer_function___('s:foldr'),'make': s:___revitalizer_function___('s:make'),'make_index': s:___revitalizer_function___('s:make_index'),'max_by': s:___revitalizer_function___('s:max_by'),'min_by': s:___revitalizer_function___('s:min_by'),'omit': s:___revitalizer_function___('s:omit'),'pick': s:___revitalizer_function___('s:pick'),'swap': s:___revitalizer_function___('s:swap')}
 
 unlet! s:___revitalizer_sid
 delfunction s:___revitalizer_function___
