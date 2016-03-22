@@ -27,17 +27,33 @@ endfunction
 "   - :h Vital-Vital.search()
 let s:Revitalizer = {}
 
-function! s:Revitalizer.new(project_root_dir) abort dict
+function! s:Revitalizer.new(...) abort dict
   let base = deepcopy(self)
-  let base.project_root_dir = fnamemodify(a:project_root_dir, ':p')
-  let base.vital_data = s:build_vital_data(base.project_root_dir, '')
-  let base.vital_dir_rel = s:Filepath.join('autoload', 'vital', '_' . base.vital_data.name)
-  let base.vital_dir = s:Filepath.join([base.project_root_dir, base.vital_dir_rel])
-
-  " Load all vital files before calling s:ScriptLocal.scriptnames()
-  execute 'runtime!' s:Filepath.join(base.vital_dir_rel, '/**/*.vim')
-  let base.path2sid = s:Dict.swap(s:ScriptLocal.scriptnames())
+  call call(base.__init__, a:000, base)
   return base
+endfunction
+
+function! s:Revitalizer.__init__(project_root_dir) abort
+  let self.project_root_dir = fnamemodify(a:project_root_dir, ':p')
+  let self.vital_data = s:build_vital_data(self.project_root_dir, '')
+  let self.vital_dir_rel = s:Filepath.join('autoload', 'vital', '_' . self.vital_data.name)
+  let self.vital_dir = s:Filepath.join([self.project_root_dir, self.vital_dir_rel])
+  " Load all vital files before calling s:ScriptLocal.scriptnames()
+  " We cannot source files which aren't in runtimepath with `:runtime!`, so
+  " `:source` the file later if the file is not found in self.path2sid
+  let in_runtime_path = globpath(&rtp, self.vital_dir_rel) !=# ''
+  if in_runtime_path
+    execute 'runtime!' s:Filepath.join(self.vital_dir_rel, '/**/*.vim')
+  else
+    call self.source_modules()
+  endif
+  let self.path2sid = s:Dict.swap(s:ScriptLocal.scriptnames())
+endfunction
+
+function! s:Revitalizer.source_modules() abort
+  for f in self.vital_files()
+    call s:_source(f)
+  endfor
 endfunction
 
 function! s:Revitalizer.revitalize() abort
@@ -68,7 +84,12 @@ endfunction
 function! s:Revitalizer.autoloadablize_data(vital_file) abort
   let sid = get(self.path2sid, a:vital_file, -1)
   if sid is# -1
-    call s:Revitalizer.throw(printf('Unexpected error: %s is not sourced', sid))
+    " NOTE: s:ScriptLocal.sid() calls :scriptnames each times, so make sure
+    " that almost all of vital_files is in :scriptnames
+    let sid = s:ScriptLocal.sid(a:vital_file)
+    if sid is# -1
+      call s:Revitalizer.throw(printf('Unexpected error: %s cannot be sourced', a:vital_file))
+    endif
   endif
   " It doesn't need to filter functions here because Vital.import() will
   " filter them after calling module._vital_loaded() and module._vital_created().
@@ -135,4 +156,13 @@ endfunction
 " @return {list<string>}
 function! s:ls_R_vimfiles(path) abort
   return split(glob(s:Filepath.join(a:path, '/**/*.vim'), 1), "\n")
+endfunction
+
+function! s:_source(path) abort
+  try
+    execute ':source' fnameescape(a:path)
+  catch /^Vim\%((\a\+)\)\=:E121/
+    " NOTE: workaround for `E121: Undefined variable: s:save_cpo`
+    execute ':source' fnameescape(a:path)
+  endtry
 endfunction
