@@ -1,0 +1,21 @@
+version: '{build}'
+clone_depth: 1
+environment:
+  VIM_URL: http://files.kaoriya.net/vim/vim74-kaoriya-win64.zip
+install:
+- ps: |
+    $zip = $Env:APPVEYOR_BUILD_FOLDER + '\vim.zip'
+    $vim = $Env:APPVEYOR_BUILD_FOLDER + '\vim\'
+    (New-Object Net.WebClient).DownloadFile($Env:VIM_URL, $zip)
+    [Reflection.Assembly]::LoadWithPartialName('System.IO.Compression.FileSystem') > $null
+    [System.IO.Compression.ZipFile]::ExtractToDirectory($zip, $vim)
+    $Env:THEMIS_VIM = $vim + (Get-ChildItem $vim).Name + '\vim.exe'
+    git -c advice.detachedHead=false clone https://github.com/thinca/vim-themis --quiet --branch v1.5 --single-branch --depth 1 $Env:TEMP\vim-themis
+    git -c advice.detachedHead=false clone https://github.com/vim-jp/vital.vim --quiet --depth 1 $Env:TEMP\vital.vim
+    git -c advice.detachedHead=false clone https://github.com/haya14busa/vital-power-assert --quiet --depth 1 $Env:TEMP\vital-power-assert
+build: off
+test_script:
+- ps: |
+    & $Env:THEMIS_VIM --version
+    & $Env:TEMP\vim-themis\bin\themis.bat --runtimepath $Env:TEMP\vital.vim --runtimepath $Env:TEMP\vital-power-assert --reporter spec
+deploy: off
