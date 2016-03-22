@@ -7,8 +7,10 @@ Describe Revital
     execute powerassert#import().define('PowerAssert')
 
     let vitalize_modules  = ['Data.List', 'Data.String', 'Web.JSON', 'Cyclic1']
-    execute ':Vitalize' g:testplugin_root join(vitalize_modules, ' ')
-    execute ':Revitalize' g:testplugin_root
+    let cmd = ':verbose Vitalize --name=testplugin ' . Filepath.unixpath(g:testplugin_root) . ' ' . join(vitalize_modules, ' ')
+    verbose execute cmd
+    verbose execute ':verbose Revitalize' Filepath.unixpath(g:testplugin_root)
+    verbose echo ''
   End
 
   After all
@@ -26,8 +28,8 @@ Describe Revital
 
   Describe :Revitalize
     It succeeded in Before all
-        let vital_data = Filepath.join(
-        \   g:testplugin_root, 'autoload', 'vital', g:testplugin_name . '.vital')
+        let vital_data = Filepath.realpath(Filepath.join(
+        \   g:testplugin_root, 'autoload', 'vital', g:testplugin_name . '.vital'))
         PowerAssert filereadable(vital_data)
     End
 
