@@ -113,7 +113,9 @@ function! s:Revitalizer.autoloadablize_data(vital_file) abort
 endfunction
 
 function! s:Revitalizer.autoload_path(vital_file) abort
-  return substitute(a:vital_file[len(s:Filepath.join(self.project_root_dir . 'autoload/')):], '/', '#', 'g')[:- (len('.vim') + 1)]
+  let vital_file = s:Filepath.unixpath(a:vital_file)
+  let prd = s:Filepath.unixpath(self.project_root_dir)
+  return substitute(vital_file[len(s:Filepath.join(prd, 'autoload/')):], '/', '#', 'g')[:- (len('.vim') + 1)]
 endfunction
 
 " NOTE: it doesn't support `:finish` statement in module files
