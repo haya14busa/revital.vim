@@ -1,6 +1,8 @@
 let s:vital_name = expand('<sfile>:t:r')
 let s:base_dir = expand('<sfile>:h')
 let s:loaded = {}
+let s:__latest__ = expand('<sfile>:h') . '/__latest__'
+let s:has_self_modules = isdirectory(s:__latest__)
 
 " function() wrapper
 if v:version > 703 || v:version == 703 && has('patch1170')
@@ -131,11 +133,7 @@ function! s:_import(name) abort dict
   if has_key(s:loaded, a:name)
     return copy(s:loaded[a:name])
   endif
-  try
-    let module = vital#_{self.vital_name}#{substitute(a:name, '\.', '#', 'g')}#import()
-  catch /E117: Unknown function:/
-    throw 'vital: revitalizer: module not found: ' . a:name
-  endtry
+  let module = self._get_module(a:name)
   if has_key(module, '_vital_created')
     call module._vital_created(module)
   endif
@@ -154,6 +152,27 @@ function! s:_import(name) abort dict
   return copy(s:loaded[a:name])
 endfunction
 let s:Vital._import = function('s:_import')
+
+function! s:_get_module(name) abort dict
+  try
+    let module = vital#_{self.vital_name}#{substitute(a:name, '\.', '#', 'g')}#import()
+  catch /E117: Unknown function:/
+    if !s:has_self_modules
+      throw 'vital: revitalizer: module not found: ' . a:name
+    endif
+    " Retry with original vital to support loading self modules.
+    let module = s:orig_vital().import(a:name)
+  endtry
+  return module
+endfunction
+let s:Vital._get_module = function('s:_get_module')
+
+function! s:orig_vital() abort
+  if !exists('s:orig_vital')
+    let s:orig_vital = vital#of(s:vital_name)
+  endif
+  return s:orig_vital
+endfunction
 
 if exists('*uniq')
   function! s:_uniq(list) abort
