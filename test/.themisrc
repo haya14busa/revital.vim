@@ -1,0 +1,21 @@
+let g:root = fnamemodify(expand('<sfile>'), ':h:h')
+let g:testplugin_name = 'testplugin'
+let g:testplugin_root = g:root . '/test/_testdata/' . g:testplugin_name . '/'
+let g:cyclic_module_root = g:root . '/test/_testdata/cyclic/'
+
+call themis#option('recursive', 1)
+call themis#option('exclude', ['test/_testdata/'])
+call themis#option('runtimepath', expand('~/.vim/bundle/vital.vim'))
+call themis#option('runtimepath', expand('~/.vim/bundle/vital-power-assert'))
+
+call themis#option('runtimepath', g:testplugin_root)
+call themis#option('runtimepath', g:cyclic_module_root)
+
+let g:Expect = themis#helper('expect')
+call themis#helper('command').with(themis#helper('assert')).with({'Expect': g:Expect})
+
+let g:__vital_power_assert_config = {
+\   '__debug__': 1,
+\   '__pseudo_throw__': 0,
+\   '__max_length__': -1
+\ }
