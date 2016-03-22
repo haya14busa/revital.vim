@@ -1,0 +1,129 @@
+*revital.txt*	Speed up vital.vim!!!
+
+Author  : haya14busa <hayabusa1419@gmail.com>
+Version : 0.9.0
+License : MIT license {{{
+
+  Copyright (c) 2016 haya14busa
+
+  Permission is hereby granted, free of charge, to any person obtaining
+  a copy of this software and associated documentation files (the
+  "Software"), to deal in the Software without restriction, including
+  without limitation the rights to use, copy, modify, merge, publish,
+  distribute, sublicense, and/or sell copies of the Software, and to
+  permit persons to whom the Software is furnished to do so, subject to
+  the following conditions:
+  The above copyright notice and this permission notice shall be
+  included in all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+  IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+  CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+  TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+}}}
+
+==============================================================================
+CONTENTS				*revital-contents*
+
+INTRODUCTION		|revital-introduction|
+INSTALLATION		|revital-installation|
+USAGE			|revital-usage|
+INTERFACE		|revital-interface|
+	Commands		|revital-commands|
+	Functions		|revital-functions|
+	Vital object		|revital-Vital-object|
+Q&A			|revital-Q&A|
+Changelog		|revital-changelog|
+
+==============================================================================
+INTRODUCTION				*revital-introduction*
+
+*revital.vim* makes |vital.vim| [1] a lot faster by little hack.
+
+[1]: https://github.com/vim-jp/vital.vim
+
+==============================================================================
+USAGE					*revital-usage*
+
+How to start revital.vim~
+
+	1. Execute |:Vitalize| --name={plugin-name} {target-dir} [{module} ...]
+	   to embed vital modules if you didn't run :Vitalize yet.
+	   See |:Vitalize| & |Vital-usage|.
+	2. Execute |:Revitalize| {target-dir}.
+	3. Replace vital#of('plugin-name') with |vital#{plugin-name}#of()|.
+	4. The rest of usage is same as |Vital-usage|.
+	5. Enjoy speed!
+
+==============================================================================
+INTERFACE				*revital-interface*
+------------------------------------------------------------------------------
+COMMANDS				*revital-commands*
+
+:Revitalize {target-dir}		*:Revitalize*
+	{target-dir} is same as an arg in |:Vitalize| command.
+	You must execute |:Vitalize| before executing |:Revitalize|.
+
+------------------------------------------------------------------------------
+FUNCTIONS 				*revital-functions*
+
+vital#{plugin-name}#of()		*vital#{plugin-name}#of()*
+	Creates a new Vital object(|revital-Vital-object|).
+
+------------------------------------------------------------------------------
+Vital object 				*revital-Vital-object*
+	Interface of |revital-Vital-object| is same as |Vital-Vital-object|.
+	But some methods of |revital-Vital-object| is a lot faster than
+	|Vital-Vital-object|'s one.
+
+Vital.import({module-name} [, {to}])	*revital-Vital.import()*
+	[Faster!] Same as |Vital-Vital.import()|.
+
+Vital.load({module-name})		*revital-Vital.load()*
+	[Faster!] Same as |Vital-Vital.load()|.
+
+Vital.exists({module-name})		*revital-Vital.exists()*
+	Same as |Vital-Vital.exists()|.
+
+Vital.search({pattern})			*revital-Vital.search()*
+	Same as |Vital-Vital.search()|.
+
+==============================================================================
+Q&A					*revital-Q&A*
+
+Q&A 1:					*revital-Q&A-1*
+	Q: Why |revital.vim| is faster than |vital.vim|?
+
+	A: Because |revital-Vital.import()| and |revital-Vital.load()| loads
+	modules by |autoload-functions| and |:Revitalize| creates vital module
+	dictionary in advance.
+	On the other hand, |Vital-Vital.import()| and |Vital-Vital.load()| in
+	|vital.vim| load modules by searching module files and creates vital
+	module object from scrach, so it takes longer time.
+
+	Profile 1: https://github.com/haya14busa/incsearch.vim/pull/112
+	Profile 2: https://github.com/easymotion/vim-easymotion/pull/282
+
+Q&A 2:					*revital-Q&A-2*
+	Q: Why not contribute to |vital.vim|?
+
+	A: Because one interface (vital#{plugin-name}#of() instead of
+	vital#of()) is different from |vital.vim| and |revital.vim| requires
+	some hacks (it appends lines to module files).
+	However, |revital.vim| doesn't break backward compatibility with
+	|vital.vim|, so it can be intergrate with |vital.vim| as an
+	enhancement. I want to contribute to |vital.vim| when |revital.vim|
+	is known as stable and making |vital.vim| faster.
+
+==============================================================================
+CHANGELOG				*revital-changelog*
+
+0.9.0	2016-03-23
+  - Init.
+
+==============================================================================
+vim:tw=78:ts=8:ft=help:norl:noet:fen:fdl=0:fdm=marker:
