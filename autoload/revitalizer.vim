@@ -104,7 +104,8 @@ function! s:Revitalizer.autoloadablize_data(vital_file) abort
   " filter them after calling module._vital_loaded() and module._vital_created().
   " However, this line collects functions here including module._vital_*() to
   " reduce the size of autoloadablize code.
-  let functions = keys(filter(s:ScriptLocal.sid2sfuncs(sid), 'v:key =~# "^\\a" || v:key =~# "^_vital_"'))
+  " sort() functions not to generate unneeded diff.
+  let functions = sort(keys(filter(s:ScriptLocal.sid2sfuncs(sid), 'v:key =~# "^\\a" || v:key =~# "^_vital_"')))
   return {
   \   'autoload_path': self.autoload_path(a:vital_file),
   \   'key_to_function': '{' . join(map(functions, "printf(\"'%s': s:___revitalizer_function___('s:%s')\", v:val, v:val)"), ',') . '}'
