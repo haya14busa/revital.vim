@@ -104,7 +104,7 @@ endfunction
 let s:Vital.exists = s:_function('s:exists')
 
 function! s:search(pattern) abort dict
-  let paths = s:_extract_files(a:pattern, s:vital_files())
+  let paths = s:_extract_files(a:pattern, self.vital_files())
   let modules = sort(map(paths, 's:_file2module(v:val)'))
   return s:_uniq(modules)
 endfunction
