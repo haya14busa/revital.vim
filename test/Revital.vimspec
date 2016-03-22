@@ -15,6 +15,10 @@ Describe Revital
     verbose execute cmd
     verbose echo 'cmd: ' . cmd
     verbose execute ':verbose Revitalize' Filepath.winpath(g:testplugin_root)
+    let cmd = ':verbose Vitalize ' . Filepath.unixpath(g:testplugin_root) . ' ' . join(vitalize_modules, ' ')
+    verbose execute cmd
+    verbose echo 'cmd: ' . cmd
+    verbose execute ':verbose Revitalize' Filepath.unixpath(g:testplugin_root)
   End
 
   After all
