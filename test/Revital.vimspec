@@ -7,7 +7,7 @@ Describe Revital
     execute powerassert#import().define('PowerAssert')
 
     let vitalize_modules  = ['Data.List', 'Data.String', 'Web.JSON', 'Cyclic1']
-    execute 'set runtimepath+=' . Filepath.unixpath(g:testplugin_root)
+    " execute 'set runtimepath+=' . Filepath.unixpath(g:testplugin_root)
     let cmd = ':verbose Vitalize --name=testplugin ' . Filepath.unixpath(g:testplugin_root) . ' ' . join(vitalize_modules, ' ')
     verbose execute cmd
     verbose execute ':verbose Revitalize' Filepath.unixpath(g:testplugin_root)

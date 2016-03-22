@@ -18,5 +18,5 @@ build: off
 test_script:
 - ps: |
     & $Env:THEMIS_VIM --version
-    & $Env:TEMP\vim-themis\bin\themis.bat --runtimepath $Env:TEMP\test\_testdata\testplugin --runtimepath $Env:TEMP\test\_testdata\testplugin\test\_testdata\cyclic --runtimepath $Env:TEMP\vital.vim --runtimepath $Env:TEMP\vital-power-assert --reporter spec
+    & $Env:TEMP\vim-themis\bin\themis.bat --runtimepath $Env:TEMP\vital.vim --runtimepath $Env:TEMP\vital-power-assert --reporter spec
 deploy: off
