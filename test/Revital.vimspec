@@ -7,8 +7,10 @@ Describe Revital
     execute powerassert#import().define('PowerAssert')
 
     let vitalize_modules  = ['Data.List', 'Data.String', 'Web.JSON', 'Cyclic1']
-    execute ':Vitalize' Filepath.realpath(g:testplugin_root) join(vitalize_modules, ' ')
-    execute ':Revitalize' Filepath.realpath(g:testplugin_root)
+    verbose execute ':verbose Vitalize' Filepath.realpath(g:testplugin_root) join(vitalize_modules, ' ')
+    verbose execute ':verbose Revitalize' Filepath.realpath(g:testplugin_root)
+    verbose execute ':verbose Vitalize' Filepath.winpath(g:testplugin_root) join(vitalize_modules, ' ')
+    verbose execute ':verbose Revitalize' Filepath.winpath(g:testplugin_root)
   End
 
   After all
