@@ -28,8 +28,8 @@ Describe Revital
 
   Describe :Revitalize
     It succeeded in Before all
-        let vital_data = Filepath.join(
-        \   g:testplugin_root, 'autoload', 'vital', g:testplugin_name . '.vital')
+        let vital_data = FP.unixpath(Filepath.join(
+        \   g:testplugin_root, 'autoload', 'vital', g:testplugin_name . '.vital'))
         PowerAssert filereadable(vital_data)
     End
 
@@ -51,6 +51,7 @@ Describe Revital
 
   Describe revital-Vital-object
     Before all
+      execute ':runtime!' g:testplugin_root g:cyclic_module_root
       let V = vital#{g:testplugin_name}#of()
     End
 
