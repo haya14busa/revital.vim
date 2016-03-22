@@ -1,4 +1,6 @@
-let s:V = vital#of('vital')
+let g:revitalizer#debug = get(g:, 'revitalizer#debug', 0)
+
+let s:V = g:revitalizer#debug ? vital#of('vital') : vital#revital#of()
 let s:File = s:V.import('System.File')
 let s:Filepath = s:V.import('System.Filepath')
 let s:ScriptLocal = s:V.import('Vim.ScriptLocal')
