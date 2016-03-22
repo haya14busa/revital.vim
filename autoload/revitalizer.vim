@@ -14,7 +14,7 @@ let s:build_vital_data = s:ScriptLocal.sfuncs('autoload/vitalizer.vim').build_vi
 function! revitalizer#command(args) abort
   let target_dir = fnamemodify(a:args[0], ':p')
   try
-    let revitalizer = s:Revitalizer.new(target_dir)
+    let revitalizer = s:new(target_dir)
     call revitalizer.revitalize()
   catch /Revitalizer:/
     call s:Message.error(v:exception)
@@ -33,8 +33,8 @@ endfunction
 "   - :h Vital-Vital.search()
 let s:Revitalizer = {}
 
-function! s:Revitalizer.new(...) abort dict
-  let base = deepcopy(self)
+function! s:new(...) abort
+  let base = deepcopy(s:Revitalizer)
   call call(base.__init__, a:000, base)
   return base
 endfunction
