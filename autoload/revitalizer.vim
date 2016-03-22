@@ -150,7 +150,6 @@ let s:auto_loadable_template = [
 " a:project_root_dir is same as {target-dir} in :h :Vitalize
 " @return {list<string>}
 function! s:Revitalizer.vital_files() abort
-  let vital_name = self.vital_data.name
   let path = s:Filepath.join(self.vital_dir)
   return s:ls_R_vimfiles(path)
 endfunctio
