@@ -99,7 +99,18 @@ endfunction
 let s:Vital.unload = s:_function('s:unload')
 
 function! s:exists(name) abort dict
-  return exists(printf('*vital#_%s#%s#import', self.vital_name, substitute(a:name, '\.', '#', 'g')))
+  let b = exists(printf('*vital#_%s#%s#import', self.vital_name, substitute(a:name, '\.', '#', 'g')))
+  if b
+    return b
+  endif
+  let name_path = substitute(a:name, '\.', '/', 'g')
+  let path = printf('%s/_%s/%s.vim', s:base_dir, self.vital_name, name_path)
+  let b = filereadable(path)
+  if b
+    return b
+  endif
+  let path = printf('%s/_%s/%s.vim', s:base_dir, '_latest__', name_path)
+  let b = filereadable(path)
 endfunction
 let s:Vital.exists = s:_function('s:exists')
 

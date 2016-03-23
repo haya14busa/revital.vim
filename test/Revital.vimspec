@@ -6,7 +6,7 @@ Describe Revital
     let ScriptLocal = Vital.import('Vim.ScriptLocal')
     execute powerassert#import().define('PowerAssert')
 
-    let vitalize_modules  = ['Data.List', 'Data.String', 'Web.JSON', 'Cyclic1']
+    let vitalize_modules  = ['Data.List', 'Data.LazyList', 'Data.String', 'Web.JSON', 'Cyclic1']
     let cmd = ':verbose Vitalize --name=testplugin ' . Filepath.unixpath(g:testplugin_root) . ' ' . join(vitalize_modules, ' ')
     verbose execute cmd
     verbose execute ':verbose Revitalize' Filepath.unixpath(g:testplugin_root)
@@ -116,6 +116,11 @@ Describe Revital
       It returns 1 for existing module
         let V = vital#{g:testplugin_name}#of()
         PowerAssert V.exists('Data.List')
+      End
+
+      It returns 1 for existing which didn't be sorced yet
+        let V = vital#{g:testplugin_name}#of()
+        PowerAssert V.exists('Data.LazyList')
       End
 
       It returns 0 for non-existing module
