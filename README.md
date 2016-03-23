@@ -1,7 +1,12 @@
 :zap: revital.vim :zap:
 =======================
 
-[![Build Status](https://travis-ci.org/haya14busa/revital.vim.svg?branch=master)](https://travis-ci.org/haya14busa/revital.vim) [![Build status](https://ci.appveyor.com/api/projects/status/ptn6o5lgd13737af/branch/master?svg=true)](https://ci.appveyor.com/project/haya14busa/revital-vim/branch/master)
+[![Build Status](https://travis-ci.org/haya14busa/revital.vim.svg?branch=master)](https://travis-ci.org/haya14busa/revital.vim)
+[![Build status](https://ci.appveyor.com/api/projects/status/ptn6o5lgd13737af/branch/master?svg=true)](https://ci.appveyor.com/project/haya14busa/revital-vim/branch/master)
+[![](https://img.shields.io/github/tag/haya14busa/revital.vim.svg)](https://github.com/haya14busa/revital.vim/releases)
+[![](https://img.shields.io/github/issues/haya14busa/revital.vim.svg)](https://github.com/haya14busa/revital.vim/issues)
+[![](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![](https://img.shields.io/badge/doc-%3Ah%20revital.txt-red.svg)](doc/revital.vim.txt)
 
 revital.vim makes [vital.vim](https://github.com/vim-jp/vital.vim) a lot faster.
 
