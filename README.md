@@ -1,6 +1,8 @@
 :zap: revital.vim :zap:
 =======================
 
+[![Build Status](https://travis-ci.org/haya14busa/revital.vim.svg?branch=master)](https://travis-ci.org/haya14busa/revital.vim) [![Build status](https://ci.appveyor.com/api/projects/status/ptn6o5lgd13737af/branch/master?svg=true)](https://ci.appveyor.com/project/haya14busa/revital-vim/branch/master)
+
 revital.vim makes [vital.vim](https://github.com/vim-jp/vital.vim) a lot faster.
 
 How to start revital.vim
