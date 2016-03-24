@@ -16,7 +16,7 @@ if !(v:version > 703 || v:version == 703 && has('patch1170'))
 endif
 
 function! vital#_revital#Vim#Message#import() abort
-  return map({'capture': '', 'echomsg': '', 'echo': '', 'warn': '', 'get_hit_enter_max_length': '', 'error': ''},  printf("{%s}('s:%s')", s:___vital_function___, v:key))
+  return map({'capture': '', 'echomsg': '', 'echo': '', 'warn': '', 'get_hit_enter_max_length': '', 'error': ''},  '{s:___vital_function___}("s:" . v:key)')
 endfunction
 " ___vital___
 let s:save_cpo = &cpo

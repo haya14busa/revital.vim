@@ -16,7 +16,7 @@ if !(v:version > 703 || v:version == 703 && has('patch1170'))
 endif
 
 function! vital#_revital#Data#Dict#import() abort
-  return map({'pick': '', 'clear': '', 'max_by': '', 'foldl': '', 'swap': '', 'omit': '', 'min_by': '', 'foldr': '', 'make_index': '', 'make': ''},  printf("{%s}('s:%s')", s:___vital_function___, v:key))
+  return map({'pick': '', 'clear': '', 'max_by': '', 'foldl': '', 'swap': '', 'omit': '', 'min_by': '', 'foldr': '', 'make_index': '', 'make': ''},  '{s:___vital_function___}("s:" . v:key)')
 endfunction
 " ___vital___
 " Utilities for dictionary.

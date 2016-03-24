@@ -16,7 +16,7 @@ if !(v:version > 703 || v:version == 703 && has('patch1170'))
 endif
 
 function! vital#_revital#System#Filepath#import() abort
-  return map({'path_separator': '', 'is_case_tolerant': '', 'dirname': '', 'abspath': '', 'relpath': '', 'realpath': '', 'unify_separator': '', 'is_root_directory': '', 'split': '', 'path_extensions': '', 'unixpath': '', 'which': '', 'winpath': '', 'join': '', 'separator': '', 'is_relative': '', 'basename': '', 'remove_last_separator': '', 'is_absolute': '', 'contains': ''},  printf("{%s}('s:%s')", s:___vital_function___, v:key))
+  return map({'path_separator': '', 'is_case_tolerant': '', 'dirname': '', 'abspath': '', 'relpath': '', 'realpath': '', 'unify_separator': '', 'is_root_directory': '', 'split': '', 'path_extensions': '', 'unixpath': '', 'which': '', 'winpath': '', 'join': '', 'separator': '', 'is_relative': '', 'basename': '', 'remove_last_separator': '', 'is_absolute': '', 'contains': ''},  '{s:___vital_function___}("s:" . v:key)')
 endfunction
 " ___vital___
 " You should check the following related builtin functions.

@@ -16,7 +16,7 @@ if !(v:version > 703 || v:version == 703 && has('patch1170'))
 endif
 
 function! vital#_revital#System#File#import() abort
-  return map({'move_exe': '', 'move': '', 'copy_exe': '', 'move_vim': '', 'copy': '', 'copy_vim': '', 'mkdir_nothrow': '', 'open': '', 'rmdir': ''},  printf("{%s}('s:%s')", s:___vital_function___, v:key))
+  return map({'move_exe': '', 'move': '', 'copy_exe': '', 'move_vim': '', 'copy': '', 'copy_vim': '', 'mkdir_nothrow': '', 'open': '', 'rmdir': ''},  '{s:___vital_function___}("s:" . v:key)')
 endfunction
 " ___vital___
 " Utilities for file copy/move/mkdir/etc.

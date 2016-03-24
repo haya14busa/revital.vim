@@ -16,7 +16,7 @@ if !(v:version > 703 || v:version == 703 && has('patch1170'))
 endif
 
 function! vital#_revital#Vim#ScriptLocal#import() abort
-  return map({'scriptnames': '', 'sid2path': '', 'sid2sfuncs': '', 'sfuncs': '', 'svars': '', 'sid': '', 'sid2svars': ''},  printf("{%s}('s:%s')", s:___vital_function___, v:key))
+  return map({'scriptnames': '', 'sid2path': '', 'sid2sfuncs': '', 'sfuncs': '', 'svars': '', 'sid': '', 'sid2svars': ''},  '{s:___vital_function___}("s:" . v:key)')
 endfunction
 " ___vital___
 scriptencoding utf-8
